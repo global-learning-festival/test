@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Singapore Polytechnic Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #0077B6;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        main {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #map {
+            max-width: 100%;
+            height: 400px; /* Set a fixed height for the map */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Singapore Polytechnic</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="map"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your Website</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+         // Initialize the map
+         var map = L.map('map');
+
+// Get the user's current location
+navigator.geolocation.getCurrentPosition(function(position) {
+    var userLocation = [position.coords.latitude, position.coords.longitude];
+    map.setView(userLocation, 16);
+
+    // Add a circle for the user's location
+    var userCircle = L.circle(userLocation, {
+        color: 'red',
+        fillColor: 'red',
+        fillOpacity: 0.5,
+        radius: 10
+    }).addTo(map);
+
+    // Add a marker for the water refill location
+    var waterRefillLocation = L.marker([1.310411032362568, 103.77767848691333]).addTo(map);
+
+    // Make the popup for the water refill station appear on hover
+    waterRefillLocation.on('mouseover', function () {
+        waterRefillLocation.bindPopup("Water Refill").openPopup();
+    });
+
+    // Close the popup when the mouse is not hovering over the marker
+    waterRefillLocation.on('mouseout', function () {
+        waterRefillLocation.closePopup();
+    });
+
+    // Add OneMap as a tile layer
+    L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        subdomains: ['a', 'b', 'c'],
+        attribution: 'Map data © <a href="https://www.onemap.sg/" target="_blank">OneMap</a>',
+        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4YmYzMDFhZWQ2NzY3NjJkZWQxZTgzYTQ0MWU5ODA1OCIsImlzcyI6Imh0dHA6Ly9pbnRlcm5hbC1hbGItb20tcHJkZXppdC1pdC0xMjIzNjk4OTkyLmFwLXNvdXRoZWFzdC0xLmVsYi5hbWF6b25hd3MuY29tL2FwaS92Mi91c2VyL3Bhc3N3b3JkIiwiaWF0IjoxNjk4MTE1MDMxLCJleHAiOjE2OTgzNzQyMzEsIm5iZiI6MTY5ODExNTAzMSwianRpIjoiMFRiTURPc2h0b1ZoOHZDOCIsInVzZXJfaWQiOjEzNjMsImZvcmV2ZXIiOmZhbHNlfQ.VU24uLUE0XPAsr-ZGfuDLeheqWfqqz3eDVVyaRRvE8o', // Add your OneMap API key here
+    }).addTo(map);
+});
+    </script>
+</body>
+</html>

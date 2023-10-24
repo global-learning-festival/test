@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Singapore Polytechnic Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/perliedman/leaflet-routing-machine/v3.2.12/dist/leaflet-routing-machine.css" />
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #0077B6;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        main {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #map {
+            max-width: 100%;
+            height: 400px; /* Set a fixed height for the map */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        .routing-control {
+            max-width: 300px;
+        }
+        .directions-collapse {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-in-out;
+        }
+        .directions-show {
+            max-height: 500px; /* Adjust the maximum height as needed */
+            overflow-y: auto;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Singapore Polytechnic</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="map"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your Website</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.rawgit.com/perliedman/leaflet-routing-machine/v3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map');
+
+        var control; // Variable to hold the routing control
+        var userLocationMarker; // Marker for user's current location
+
+        // Function to create or hide the routing control
+        function toggleRoutingControl(startLocation) {
+            if (!control) {
+                // Define the routing control only if it doesn't exist
+                var waypoints = [startLocation, L.latLng(1.310411032362568, 103.77767848691333)]; // Start from user location
+                control = L.Routing.control({
+                    waypoints: waypoints,
+                    routeWhileDragging: true,
+                    createMarker: function (i, wp, nWps) {
+                        if (i === 0) {
+                            // Start point
+                            return userLocationMarker;
+                        } else if (i === nWps - 1) {
+                            // End point (water refill location)
+                            return L.marker(wp.latLng, {
+                                icon: L.divIcon({ className: 'leaflet-div-icon', html: '<i class="fas fa-map-marker"></i>' })
+                            });
+                        }
+                    }
+                }).addTo(map);
+            } else {
+                // Update waypoints and show the routing control
+                var waypoints = [startLocation, L.latLng(1.310411032362568, 103.77767848691333)];
+                control.setWaypoints(waypoints);
+                control.show();
+            }
+        }
+
+        // Function to create or update the user location marker
+        function updateUserLocationMarker(location) {
+            if (!userLocationMarker) {
+                userLocationMarker = L.marker(location, {
+                    icon: L.divIcon({ className: 'leaflet-div-icon', html: '<i class="fas fa-location-arrow"></i>' })
+                });
+            } else {
+                userLocationMarker.setLatLng(location);
+            }
+        }
+
+        // Get the user's current location
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLocation = L.latLng(position.coords.latitude, position.coords.longitude);
+
+            map.setView(userLocation, 16);
+
+            updateUserLocationMarker(userLocation);
+            userLocationMarker.addTo(map);
+
+            var waterRefillLocation = L.marker([1.310411032362568, 103.77767848691333]).addTo(map);
+
+            var waterRefillPopup = L.popup()
+                .setContent("Water Refill");
+
+            // Function to start or update the route
+            function startRouteFromUserLocation() {
+                var startLocation = userLocationMarker.getLatLng();
+                toggleRoutingControl(startLocation);
+            }
+
+            // Click event handler for the water refill location marker
+            waterRefillLocation.on('click', function () {
+                startRouteFromUserLocation();
+                waterRefillPopup.setLatLng(waterRefillLocation.getLatLng()).openOn(map);
+            });
+
+            // Close the popup when the mouse is not hovering over the marker
+            waterRefillLocation.on('mouseout', function () {
+                map.closePopup(waterRefillPopup);
+            });
+
+            L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                subdomains: ['a', 'b', 'c'],
+                attribution: 'Map data © <a href="https://www.onemap.sg/" target="_blank">OneMap</a>',
+                token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4YmYzMDFhZWQ2NzY3NjJkZWQxZTgzYTQ0MWU5ODA1OCIsImlzcyI6Imh0dHA6Ly9pbnRlcm5hbC1hbGItb20tcHJkZXppdC1pdC0xMjIzNjk4OTkyLmFwLXNvdXRoZWFzdC0xLmVsYi5hbWF6b25hd3MuY29tL2FwaS92Mi91c2VyL3Bhc3N3b3JkIiwiaWF0IjoxNjk4MTE1MDMxLCJleHAiOjE2OTgzNzQyMzEsIm5iZiI6MTY5ODExNTAzMSwianRpIjoiMFRiTURPc2h0b1ZoOHZDOCIsInVzZXJfaWQiOjEzNjMsImZvcmV2ZXIiOmZhbHNlfQ.VU24uLUE0XPAsr-ZGfuDLeheqWfqqz3eDVVyaRRvE8o', // Replace with your OneMap token
+            }).addTo(map);
+        });
+
+        // Function to toggle directions list
+        function toggleDirections() {
+            var directionsList = document.getElementById('directions-list');
+            directionsList.classList.toggle('directions-collapse');
+            directionsList.classList.toggle('directions-show');
+        }
+
+        // Function to end the directions and clear the route
+        function endDirections() {
+            if (control) {
+                control.hide();
+            }
+            var directionsList = document.getElementById('directions-list');
+            directionsList.classList.remove('directions-show');
+            directionsList.classList.add('directions-collapse');
+        }
+    </script>
+</body>
+</html>
