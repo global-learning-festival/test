@@ -3,6 +3,7 @@ import './styles/map.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import MapView from './screens/map';
+import About from './screens/about';
 
 
 class App extends React.Component {
@@ -12,6 +13,8 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<MapView />} />
+            <Route path="/About" element={<About />} />
+
           </Routes>
         </BrowserRouter>
       </div>

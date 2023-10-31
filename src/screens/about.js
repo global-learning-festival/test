@@ -3,8 +3,7 @@ import MapComponent from '../components/mapdetail';
 
 import '../styles/map.css'
 
-
-class MapView extends React.Component {
+class About extends React.Component {
   constructor() {
     super()
   }
@@ -17,15 +16,15 @@ class MapView extends React.Component {
                 </header>
                 <nav>
                     <ul>
-                      <li><a class="active" href="/">Home</a></li>
-                        <li><a href="/About">About</a></li>
+                    <li><a href="/">Home</a></li>
+                        <li><a class="active" href="/About">About</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
                 <main>
-                    <MapComponent />
+                
                 </main>
-             
+
             </div>
 
 
@@ -35,4 +34,4 @@ class MapView extends React.Component {
 }
 
 
-export default MapView;
+export default About;
