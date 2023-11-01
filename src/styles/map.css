@@ -57,13 +57,33 @@ nav a {
 main {
     text-align: center;
     padding: 20px;
+
 }
 
-nav a.active {
-   color:#293262;
-    font-weight: bold;
-    border-bottom: 3px solid #293262;
+
+nav a {
+    position: relative;
+    padding-bottom: 2px;
+    text-decoration: none;
+    
   }
+  nav a.active {
+    color: #293262; 
+  }
+nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: transparent;
+    background: linear-gradient(to right , transparent , rgba(69, 67, 160, 1) 70%, rgba(69, 67, 160, 1) 100%);
+  
+  }
+
+
+  
 MapContainer {
 
     max-width: 100%;
