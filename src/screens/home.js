@@ -14,8 +14,9 @@ class Home extends React.Component {
     return (
       <div>
                 
-                <nav>
-                    <ul>
+                <nav class="nav">
+                    <ul>               
+                    <img class="logo" src="src../assets/water-refill-icon.png"></img>
                       <li><a class="active" href="/">Home</a></li>
                         <li><a href="/About">About</a></li>
                         <li><a href="#">Contact</a></li>
