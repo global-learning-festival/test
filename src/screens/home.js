@@ -2,9 +2,10 @@ import React from 'react';
 import MapComponent from '../components/mapdetail';
 
 import '../styles/map.css'
+import '../styles/nav.css'
 
 
-class MapView extends React.Component {
+class Home extends React.Component {
   constructor() {
     super()
   }
@@ -12,16 +13,13 @@ class MapView extends React.Component {
   render() {
     return (
       <div>
-                <header>
-                    <h1>Welcome to Singapore Polytechnic</h1>
-                    <h2>Hello</h2>
-                </header>
+                
                 <nav>
                     <ul>
                       <li><a class="active" href="/">Home</a></li>
                         <li><a href="/About">About</a></li>
                         <li><a href="#">Contact</a></li>
-                        <a>test</a>
+                        
                     </ul>
                 </nav>
                 <main>
@@ -37,4 +35,4 @@ class MapView extends React.Component {
 }
 
 
-export default MapView;
+export default Home;

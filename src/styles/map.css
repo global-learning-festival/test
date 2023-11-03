@@ -47,27 +47,12 @@ nav li {
       cursor: pointer; 
       border-radius: 5px;
 }
-nav a {
-    text-decoration: none;
-    color: #110d0d;
-    font-size: 25px;
-    font-family: alata;
-}
+
 
 main {
     text-align: center;
 
 }
-
-
-
-nav a.active {
-    color:#293262;
-     font-weight: bold;
-     border-bottom: 3px solid #293262;
-}
-
-
   
 MapContainer {
     max-width: 100%;
@@ -132,10 +117,5 @@ button:hover {
 background-color: #005a8c;
 }
 
-@font-face {
-    font-family: 'Alata';
-    src: url('../assets/fonts/Alata-Regular.ttf') format('truetype'); /* Adjust the path to match your project structure */
-    font-weight: normal;
-    font-style: normal;
-  } 
+ 
   

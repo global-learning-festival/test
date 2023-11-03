@@ -1,0 +1,41 @@
+nav a.active {
+    color:#293262;
+     font-weight: bold;
+     border-bottom: 3px solid #293262;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: #525252;
+    font-size: 25px;
+    font-family: Inter;
+}
+
+nav{
+    z-index: 1000;
+    background-color: #FFFFFF;
+    padding: 1vmax;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1
+    
+}
+
+@font-face {
+    font-family: 'Alata';
+    src: url('../assets/fonts/Alata-Regular.ttf') format('truetype'); /* Adjust the path to match your project structure */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+  @font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Regular.ttf') format('truetype'); /* Adjust the path to match your project structure */
+    font-weight: normal;
+    font-style: normal;
+  }
+
