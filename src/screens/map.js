@@ -20,6 +20,7 @@ class MapView extends React.Component {
                       <li><a class="active" href="/">Home</a></li>
                         <li><a href="/About">About</a></li>
                         <li><a href="#">Contact</a></li>
+                        <a>test</a>
                     </ul>
                 </nav>
                 <main>
