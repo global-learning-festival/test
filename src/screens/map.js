@@ -14,6 +14,7 @@ class MapView extends React.Component {
       <div>
                 <header>
                     <h1>Welcome to Singapore Polytechnic</h1>
+                    <h2>Hello</h2>
                 </header>
                 <nav>
                     <ul>
