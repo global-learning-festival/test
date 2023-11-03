@@ -56,7 +56,6 @@ nav a {
 
 main {
     text-align: center;
-    padding: 20px;
 
 }
 
@@ -71,14 +70,15 @@ nav a.active {
 
   
 MapContainer {
-
     max-width: 100%;
     height: 400px;
+    
 }
+
 #map {
     max-width: 100%;
     height: 600px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
 }
 
 .footer {
