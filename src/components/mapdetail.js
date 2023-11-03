@@ -36,7 +36,7 @@ const MapComponent = (props) => {
 
   return (
     <div id="map">
-      <MapContainer center={position} zoom={16} style={{ width: '100%', height: '400px' }}>
+      <MapContainer center={position} zoom={16} style={{ width: '100%', height: '600px' }}>
         <TileLayer
           url="https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png"
           attribution='Map data © <a href="https://www.onemap.sg/" target="_blank">OneMap</a'
