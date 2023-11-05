@@ -65,7 +65,7 @@ git checkout main
 
 git pull ( to retrieve latest codes update)
 
-//////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 How to remove local Branch after merge is completed
