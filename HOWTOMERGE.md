@@ -1,5 +1,5 @@
 How to merge ur changes to a branch
-
+---------------------------------------------
 Step 1: save your changes
 Step 2: click on the + icon for the files you want to merge and stage ur changes
 
@@ -53,7 +53,7 @@ Step 11: fill in the neccessary fields and click on Create pull request
 ![image](https://github.com/global-learning-festival/test/assets/82433697/1e03517a-189e-492a-b71d-72b10a218925)
 
 Done
-//////////////////////////////////////////////
+
 
 
 
