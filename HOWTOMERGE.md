@@ -54,8 +54,7 @@ Step 11: fill in the neccessary fields and click on Create pull request
 
 Done
 //////////////////////////////////////////////
-//////////////////////////////////////////////
-//////////////////////////////////////////////
+
 
 
 
@@ -74,16 +73,16 @@ How to remove local Branch after merge is completed
 
 Step 1: install this module
 npm i git-removed-branches
-++++++++++++++++++++
+
 Step 2: ensure you are on the main branch run the following commands
 
 git checkout main
 git fetch -p
-++++++++++++++++++++++++++++++
+
 Step 3: Removing the All Local branches run the following command
 
 git removed-branches --prune
-++++++++++++++++++++++++++++++++++++++
+
 Step 4: U can check if all ur local branches by clicking main on ur bottom left and there will be a pop up at the top to show all ur local branches
 
 
