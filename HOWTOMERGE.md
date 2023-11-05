@@ -53,33 +53,37 @@ Step 11: fill in the neccessary fields and click on Create pull request
 ![image](https://github.com/global-learning-festival/test/assets/82433697/1e03517a-189e-492a-b71d-72b10a218925)
 
 Done
-
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
 
 
 
 How to go back to main branch
+--------------------------------
 
 git checkout main
 
-do a git pull to retrieve latest codes updates
+git pull ( to retrieve latest codes update)
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 How to remove local Branch after merge is completed
+------------------------------------------------------
 
 Step 1: install this module
 npm i git-removed-branches
-
+++++++++++++++++++++
 Step 2: ensure you are on the main branch run the following commands
 
 git checkout main
 git fetch -p
-
+++++++++++++++++++++++++++++++
 Step 3: Removing the All Local branches run the following command
 
 git removed-branches --prune
-
+++++++++++++++++++++++++++++++++++++++
 Step 4: U can check if all ur local branches by clicking main on ur bottom left and there will be a pop up at the top to show all ur local branches
 
 
