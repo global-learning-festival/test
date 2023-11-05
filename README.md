@@ -15,6 +15,7 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ### `npm test`
+![image](https://github.com/global-learning-festival/test/assets/82433697/21c09f9c-7d9d-4387-96f2-df0b86a0f4fa)
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
