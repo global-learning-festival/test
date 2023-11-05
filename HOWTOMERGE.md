@@ -77,6 +77,7 @@ npm i git-removed-branches
 Step 2: ensure you are on the main branch run the following commands
 
 git checkout main
+
 git fetch -p
 
 Step 3: Removing the All Local branches run the following command
