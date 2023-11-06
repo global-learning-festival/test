@@ -4,19 +4,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import About from './screens/about';
 import Home from './screens/home';
+import Navbar from './components/Navbar';
 
 
 class App extends React.Component {
   render() {
     return (
       <div className="body">
-        <BrowserRouter>
+        <Navbar />
+        {/* <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/About" element={<About />} />
 
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </div>
     );
   }
