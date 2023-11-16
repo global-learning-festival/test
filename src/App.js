@@ -1,24 +1,34 @@
 import React from 'react';
 import './styles/map.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import About from './screens/about';
-import Home from './screens/home';
+import { Routes, Route } from 'react-router-dom';
+
+//Importing Navbar
 import Navbar from './components/Navbar';
+
+//Importing Screens
+import About from './screens/About';
+import Home from './screens/Home';
+import Map from './screens/Map';
+import Announcement from './screens/Announcement';
+import Connect from './screens/Connect';
+import Help from './screens/Help';
+import ImportantInfo from './screens/ImportantInfo';
 
 
 class App extends React.Component {
   render() {
     return (
       <div className="body">
-        <Navbar />
-        {/* <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/About" element={<About />} />
-
-          </Routes>
-        </BrowserRouter> */}
+          <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/map" element={<Map />} />
+              <Route path="/announcement" element={<Announcement />} />
+              <Route path="/connect" element={<Connect />} />     
+              <Route path="/help" element={<Help />} /> 
+              <Route path="/importantinfo" element={<ImportantInfo />} /> 
+            </Routes>
       </div>
     );
   }

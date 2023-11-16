@@ -1,5 +1,7 @@
 import React from 'react';
 import MapComponent from '../components/mapdetail';
+import { Routes, Route } from 'react-router-dom';
+
 
 import '../styles/map.css'
 import '../styles/nav.css'
