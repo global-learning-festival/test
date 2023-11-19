@@ -3,12 +3,13 @@ import { MapContainer, TileLayer, CircleMarker, Popup, Marker } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
-
+import Image from '../assets/myself.jpeg'
 import waterRefillIcon from '../assets/water-refill-icon.png';
 import 'leaflet/dist/leaflet.css';
 
 const MapComponent = (props) => {
   const [userLocation, setUserLocation] = useState(null);
+  const [hasLocationPermission, setHasLocationPermission] = useState(true); // Track location permission
   const [isRouting, setIsRouting] = useState(false);
   const [routingControl, setRoutingControl] = useState(null);
   const position = [1.310411032362568, 103.77767848691333];
@@ -57,10 +58,16 @@ const MapComponent = (props) => {
   };
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setUserLocation([latitude, longitude]);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation([latitude, longitude]);
+      },
+      (error) => {
+        console.error(error);
+        setHasLocationPermission(false);
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -88,19 +95,22 @@ const MapComponent = (props) => {
           <Marker key={refillLocation.id} position={refillLocation.coordinates} icon={customIcon}>
             <Popup>
               <div id={`divRefill${refillLocation.id}`}>
-                <p id={`Refill${refillLocation.id}`}>{refillLocation.name}</p>
-                <button
-                  id="RefillButton"
-                  onClick={() => (isRouting ? handleStopRouting() : handleRouteButtonClick(refillLocation))}
-                >
-                  {isRouting ? 'Stop Routing' : `Route to ${refillLocation.name}`}
-                </button>
+                <h3 id={`Refill${refillLocation.id}`}>{refillLocation.name}</h3>
+                <img src={Image} alt="Myself" />
+                {hasLocationPermission && (
+                  <button
+                    id="RefillButton"
+                    onClick={() => (isRouting ? handleStopRouting() : handleRouteButtonClick(refillLocation))}
+                  >
+                    {isRouting ? 'Stop Routing' : `Route to ${refillLocation.name}`}
+                  </button>
+                )}
+                {!hasLocationPermission && <p>Please enable location services to show route</p>}
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
-    
     </div>
   );
 };

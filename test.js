@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, CircleMarker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
@@ -37,24 +37,41 @@ const MapComponent = (props) => {
           L.latLng(userLocation[0], userLocation[1]),
           L.latLng(refillLocation.coordinates[0], refillLocation.coordinates[1]),
         ],
-        routeWhileDragging: true
+        routeWhileDragging: true,
+        createMarker: function () {}, // Empty function to create no markers
+        createButton: function () {}, // Empty function to create no control button
       });
+
       routingControl.addTo(mapRef.current);
       setRoutingControl(routingControl);
       setIsRouting(true);
     }
+ 
   };
 
-
-  
+  const handleStopRouting = () => {
+    if (isRouting && routingControl) {
+      mapRef.current.removeControl(routingControl);
+      setRoutingControl(null);
+      setIsRouting(false);
+    }
+  };
 
   useEffect(() => {
-    // Use the Geolocation API to get the user's current location
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setUserLocation([latitude, longitude]);
     });
   }, []);
+
+  useEffect(() => {
+    return () => {
+      // Cleanup when the component is unmounted
+      if (routingControl) {
+        mapRef.current.removeControl(routingControl);
+      }
+    };
+  }, [routingControl]);
 
   return (
     <div id="map">
@@ -63,30 +80,28 @@ const MapComponent = (props) => {
           url="https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png"
           attribution='Map data © <a href="https://www.onemap.sg/" target="_blank">OneMap</a'
         />
-        {/* Display a CircleMarker for the user's location */}
         {userLocation && (
           <CircleMarker center={userLocation} radius={5} color="red">
             <Popup>User's Location</Popup>
           </CircleMarker>
         )}
-        {/* Map over each refill location and create a Marker for each */}
         {refill.map((refillLocation) => (
           <Marker key={refillLocation.id} position={refillLocation.coordinates} icon={customIcon}>
             <Popup>
               <div id={`divRefill${refillLocation.id}`}>
                 <p id={`Refill${refillLocation.id}`}>{refillLocation.name}</p>
                 <button
-              id="RefillButton"
-          onClick={() => (isRouting ? closeRoute() : handleRouteButtonClick(refillLocation))}
+                  id="RefillButton"
+                  onClick={() => (isRouting ? handleStopRouting() : handleRouteButtonClick(refillLocation))}
                 >
-            {isRouting ? 'Stop Routing' : `Route to ${refillLocation.name}`}
-        </button>
-
+                  {isRouting ? 'Stop Routing' : `Route to ${refillLocation.name}`}
+                </button>
               </div>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
+    
     </div>
   );
 };
