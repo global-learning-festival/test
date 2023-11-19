@@ -7,13 +7,14 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
 //Importing Screens
-import About from './screens/About';
-import Home from './screens/Home';
+
+import Home from './screens/home'
 import Map from './screens/Map';
-import Announcement from './screens/Announcement';
+import Announcement from './screens/Announcement'
 import Connect from './screens/Connect';
 import Help from './screens/Help';
 import ImportantInfo from './screens/ImportantInfo';
+import AdminMap from './screens/mapchooser';
 
 
 class App extends React.Component {
@@ -28,6 +29,7 @@ class App extends React.Component {
               <Route path="/connect" element={<Connect />} />     
               <Route path="/help" element={<Help />} /> 
               <Route path="/importantinfo" element={<ImportantInfo />} /> 
+              <Route path="/mapchooser" element={<AdminMap />} /> 
             </Routes>
       </div>
     );

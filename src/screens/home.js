@@ -39,7 +39,7 @@ class Home extends React.Component {
           onClose={this.closeLoginModal}
           onLogin={() => {
             // Redirect the user to the desired login page or authentication flow
-            window.location.replace("/about"); // Example: Redirect to the "/about" page
+            window.location.replace("/map"); // Example: Redirect to the "/about" page
           }}
         />
       </div>
