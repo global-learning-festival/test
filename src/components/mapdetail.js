@@ -3,9 +3,10 @@ import { MapContainer, TileLayer, CircleMarker, Popup, Marker } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
-import Image from '../assets/myself.jpeg'
+import Image from '../assets/myself.jpeg';
 import waterRefillIcon from '../assets/water-refill-icon.png';
 import 'leaflet/dist/leaflet.css';
+
 
 const MapComponent = (props) => {
   const [userLocation, setUserLocation] = useState(null);
@@ -46,6 +47,12 @@ const MapComponent = (props) => {
       routingControl.addTo(mapRef.current);
       setRoutingControl(routingControl);
       setIsRouting(true);
+
+      // Add a class to the direction steps container
+      const directionStepsContainer = document.querySelector('.leaflet-routing-container');
+      if (directionStepsContainer) {
+        directionStepsContainer.classList.add('direction-steps-container');
+      }
     }
   };
 

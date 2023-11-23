@@ -118,4 +118,10 @@ background-color: #005a8c;
 }
 
  
+  /* Add this CSS to hide direction steps on smaller screens */
+@media (max-width: 600px) {
+    .direction-steps-container {
+      display: none;
+    }
+  }
   
