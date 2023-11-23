@@ -48,11 +48,7 @@ const MapComponent = (props) => {
       setRoutingControl(routingControl);
       setIsRouting(true);
 
-      // Add a class to the direction steps container
-      const directionStepsContainer = document.querySelector('.leaflet-routing-container');
-      if (directionStepsContainer) {
-        directionStepsContainer.classList.add('direction-steps-container');
-      }
+      
     }
   };
 
