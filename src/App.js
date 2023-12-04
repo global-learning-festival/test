@@ -15,6 +15,8 @@ import Connect from './screens/Connect';
 import Help from './screens/Help';
 import ImportantInfo from './screens/ImportantInfo';
 import AdminMap from './screens/mapchooser';
+import Chatscreen from './screens/chatscreen';
+import AdminScreen from './screens/adminchat';
 
 
 class App extends React.Component {
@@ -30,6 +32,8 @@ class App extends React.Component {
               <Route path="/help" element={<Help />} /> 
               <Route path="/importantinfo" element={<ImportantInfo />} /> 
               <Route path="/mapchooser" element={<AdminMap />} /> 
+              <Route path="/chatscreen" element={<Chatscreen />} /> 
+              <Route path="/adminscreen" element={<AdminScreen />} /> 
             </Routes>
       </div>
     );
